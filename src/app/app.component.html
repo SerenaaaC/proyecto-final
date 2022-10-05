@@ -1,0 +1,86 @@
+<div id="content">
+  <h1>COACHING PARA MASCOTAS</h1>
+  <h2>Gestión de Clientes</h2>
+
+
+  <p-table [value]="clientes" [paginator]="true" [rows]="6" styleClass="p-datatable-striped">
+    <ng-template pTemplate="header">
+      <tr class="top">
+        <th class="top">Nombre</th>
+        <th class="top">Email</th>
+        <th>Problema</th>
+        <th>Teléfono</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-c>
+      <tr>
+        <td>{{c.nombre}}</td>
+        <td>{{c.email}}</td>
+        <td>{{c.problema}}</td>
+        <td>{{c.telefono}}</td>
+        <td>
+          <button pButton type="button" icon="pi pi-pencil" title="Modificar cliente" (click)="editaCliente(c)"
+            class="p-button-raised p-button-rounded" id="pencil" iconPos="left">
+          </button>
+        </td>
+
+        <td>
+          <button pButton type="button" icon="pi pi-trash" title="Borrar cliente" (click)="borraCliente(c._id)"
+            class="p-button-raised p-button-rounded" id="can" iconPos="left">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <br><br>
+
+  <!-- Botón pa añadir cliente -->
+
+  <div id="add-button">
+    <p-speedDial (click)="muestraFormulario = !muestraFormulario"></p-speedDial>
+  </div>
+
+  <!-- Ventana emergente pa añadir y editar cliente -->
+
+  <p-dialog header="Clientes" [(visible)]="muestraFormulario" [style]="{width: '20vw'}">
+
+    <form [formGroup]="formularioCliente" (ngSubmit)="submitCliente()">
+
+        <div class="field-wrap">
+          <label for="nombre">Nombre</label>
+          <input type="text" name="" id="nombre" formControlName="nombre">
+        </div>
+
+        <div class="field-wrap">
+          <label for="email">Email</label>
+          <input type="text" name="" id="email" formControlName="email">
+        </div>
+
+        <div id="form-fields">
+          <div class="field-wrap">
+            <label for="problema">Problema</label>
+            <input type="text" name="" id="problema" formControlName="problema">
+          </div>
+
+        <div class="field-wrap">
+          <label for="telefono">Teléfono</label>
+          <input type="text" name="" id="telefono" formControlName="telefono">
+        </div>
+      </div>
+
+
+
+      <p-footer>
+        <p-button type="submit" label="Aceptar" styleClass="p-button-success">
+        </p-button>
+        &nbsp;&nbsp;
+
+        <p-button label="Cancelar" styleClass="p-button-danger" (click)="muestraFormulario = false">
+        </p-button>
+      </p-footer>
+    </form>
+  </p-dialog>
+
+</div>
